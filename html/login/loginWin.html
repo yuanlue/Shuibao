@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+      <style>
+          body{
+
+          }
+      </style>
+  </head>
+  <body>
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript">
+  function init(){
+    //如果登录信息存在 直接跳转首页
+    if($api.getStorage('token')){
+      api.openWin({
+          name: 'homeWin',
+          url: '../../html/home/homeWin.html',
+          useWKWebView:false,
+          historyGestureEnabled:false,
+          slidBackEnabled:false
+      });
+    }
+    else{
+      api.openFrame({
+          name: 'loginFrame',
+          url: '../../html/login/loginFrame.html',
+          rect: {
+              x: 0,
+              y: 0,
+              w: 'auto',
+              h: 'auto'
+          },
+          bounces: false,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled: true,
+          hScrollBarEnabled: true
+      });
+    }
+  }
+        apiready = function(){
+          setTimeout("init()",1000)
+        };
+  </script>
+  </html>

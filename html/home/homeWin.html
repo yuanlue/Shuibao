@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+      <style>
+          header{
+            background: #007e37;
+            height:25px;
+          }
+      </style>
+  </head>
+  <body>
+    <header></header>
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/jquery-3.2.1.min.js"></script>
+
+  <script type="text/javascript" src="../../script/exit.js"></script>
+  <script type="text/javascript" src="../../script/fetch.js"></script>
+
+  <script type="text/javascript">
+    function init(){
+      api.openFrame({
+          name: 'map',
+          url: '../../html/home/map.html',
+          rect: {
+              x: 0,
+              y: 25,
+              w: 'auto',
+              h: api.frameHeight-25
+
+          },
+          bounces: false,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled: true,
+          hScrollBarEnabled: true
+      });
+
+
+
+    }
+      apiready = function(){
+        init()
+        exitApp()
+      
+
+      };
+  </script>
+  </html>

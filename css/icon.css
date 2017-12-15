@@ -1,0 +1,16 @@
+.icon-location{
+  display: inline-block;
+  background: url('../image/icon-location.png') no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  width:22px;
+  height:22px;
+}
+.icon-user{
+  display: inline-block;
+  background: url('../image/icon-user.png') no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  width:21px;
+  height:21px;
+}

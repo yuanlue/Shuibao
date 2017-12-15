@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../../css/icon.css"/>
+
+      <style>
+          body{
+            margin:0;
+            padding: 0;
+            background: transparent;
+          }
+          .address{
+            margin-left:5px;
+          }
+          .location{
+            background: #008f3e;
+            line-height: 48px;
+            padding:0 10px;
+            color:white;
+          }
+          .location .right{
+            margin-top:15px;
+            float: right;
+            vertical-align: middle;
+          }
+          *:focus{
+            outline: none;
+          }
+          .search{
+            padding:0 10px;
+            background: white;
+            line-height: 45px;
+            background: white;
+          }
+          .search input{
+            width:70%;
+          }
+          select{
+            border:none;
+            border-right:1px solid #eee;
+            background: white;
+            font-size:13px;
+            color:#008f3e
+          }
+          input{
+            font-size: 14px;
+            border:none;
+            vertical-align: middle;
+          }
+      </style>
+  </head>
+  <body>
+    <div class="location">
+        <span class="icon-location"></span>
+        <span class="address" onclick="centerChange()"></span>
+        <span class="icon-user right" onclick="user()"></span>
+    </div>
+    <div class="search">
+        <select name="searchWay" id="">
+          <option value="行政划分">行政划分</option>
+          <option value="线索编号">线索编号</option>
+        </select>
+        <input type="search" placeholder="请输入搜索信息" onsearch="search()">
+    </div>
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript">
+      function search(){
+        //搜索功能
+        alert('搜索')
+      }
+      function centerChange(){
+        //位置改变
+        var str="changeCenter('"+api.pageParam.lon+"','"+api.pageParam.lat+"')";
+        api.execScript({
+            name: 'homeWin',
+            frameName: 'map',
+            script: str
+        });
+
+      }
+      function init(){
+        var obj=$api.dom('.address');
+        $api.text(obj, api.pageParam.address);
+      }
+      function user(){
+          api.openWin({
+              name: 'userWin',
+              url: '../../html/user/userWin.html',
+          });
+
+      }
+      apiready = function(){
+        init()
+      };
+  </script>
+  </html>

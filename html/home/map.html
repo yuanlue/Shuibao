@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+      <style>
+          body{
+
+          }
+      </style>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript">
+  //获取位置信息
+  function changeCenter(lon,lat){
+    bMap.getLocation({
+        accuracy: '100m',
+        autoStop: true,
+        filter: 1
+    }, function(ret, err) {
+        if (ret.status) {
+          bMap.setCenter({
+            coords: {
+                lon: lon,
+                lat: lat
+            },
+            animation: false
+        });
+        } else {
+            alert(err.code);
+        }
+    });
+
+  }
+  //通过经纬度 获取地址
+  function getAddressInfo(lon,lat){
+    api.showProgress({
+      title: '努力加载中...',
+        text: '正在获取位置信息',
+        modal: false
+    });
+    bMap.getNameFromCoords({
+          lon: lon,
+          lat: lat
+      }, function(ret, err) {
+          if (ret.status) {
+            api.openFrame({
+                name: 'search',
+                url: '../../html/common/search.html',
+                rect: {
+                    x: 0,
+                    y: 25,
+                    w: 'auto',
+                    h: 98
+                },
+                reload:true,
+                pageParam:{
+                    address:ret.address,
+                    lon:ret.lon,
+                    lat:ret.lat
+                },
+                bounces: false,
+                bgColor: 'rgba(0,0,0,0)',
+
+            });
+            api.hideProgress();
+
+          }
+      });
+  }
+  //地图初始化
+  function mapInit(lon,lat){
+    bMap.open({
+        rect: {
+            x: 0,
+            y: 0,
+            w: 'auto',
+            h: api.frameHeight
+
+        },
+        center: {
+            lon: lon,
+            lat: lat
+        },
+        zoomLevel: 9,
+        showUserLocation: true,
+        fixedOn: 'map',
+        fixed: true
+      }, function(ret) {
+        if (ret.status) {
+            bMap.setMapAttr({
+                type: 'satellite'
+            });
+            bMap.setCenter({
+            coords: {
+                lon: lon,
+                lat: lat
+            },
+            animation: true
+        });
+        }
+      });
+  }
+  function init(){
+  bMap = api.require('bMap');
+      bMap.getLocation({
+          accuracy: '100m',
+          autoStop: true,
+          filter: 1
+      }, function(ret, err) {
+
+          if (ret.status) {
+            getAddressInfo(ret.lon,ret.lat)
+            mapInit(ret.lon,ret.lat)
+
+          } else {
+              alert(err.code);
+          }
+      });
+  }
+      apiready = function(){
+      init()
+
+      };
+  </script>
+  </html>

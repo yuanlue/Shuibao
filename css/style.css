@@ -1,0 +1,20 @@
+.list-item>li:before{
+  content:"";
+  display: inline-block;
+  background:url('../image/icon-ar.png') no-repeat;
+  background-size: contain;
+  width:8px;
+  height:12px;
+  float: right;
+  margin-top:20px;
+}
+.list-item>li{
+  background: white;
+  line-height: 50px;
+  font-size:16px;
+  padding:0 10px;
+  border-bottom:1px solid #eee;
+}
+.list-item>li:active{
+  background: #eee;
+}
